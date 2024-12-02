@@ -16,7 +16,7 @@ This script requires passed arguments from post-acquire.sh.  See main collection
 
 ## Contribute
 
-[Issue Tracker] ([https://github.com/USArhythms/pipeline/issues](https://github.com/USArhythms/pipeline-behavior/issues))
+[Issue Tracker] ([https://github.com/USArhythms/pipeline-behavior/issues](https://github.com/USArhythms/pipeline-behavior/issues))
 
 [Source Code] (https://github.com/USArhythms/pipeline-behavior)
 
