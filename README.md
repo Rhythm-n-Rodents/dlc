@@ -1,6 +1,6 @@
 # **Neurodata pipeline processing scripts**
 
-***Scripts*** should be installed on compute server, which will be called via RPC (remote procedure call),=.  See https://github.com/USArhythms/pipeline for file transfer and trigger for RPC.
+***Scripts*** should be installed on compute server, which will be called via RPC (remote procedure call).  See https://github.com/USArhythms/pipeline for file transfer and trigger for RPC.
 
 This is work in progress. If you have additional scripts that may be useful in processing (automatic calculations, file transfer, etc), and wish to share with U19 consortium, please contact: drinehart@ucsd.edu.
   
