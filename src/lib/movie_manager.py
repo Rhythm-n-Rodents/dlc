@@ -6,7 +6,6 @@ import numpy as np
 from tqdm import tqdm
 from moviepy import ImageSequenceClip
 from concurrent.futures.process import ProcessPoolExecutor
-import json
 
 class MovieManager:
     def __init__(self):
