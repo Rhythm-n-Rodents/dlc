@@ -18,7 +18,7 @@ class Pipeline(MovieManager, ViewParsingManager):
         super().__init__()
         self.base_input_location=Path(base_input_location)
         self.base_output_location=Path(base_output_location)
-        self.perspective=Path(perspective)
+        self.perspective=str(perspective)
         self.src_host=src_host
         self.compute_host=compute_host
         self.task=task
@@ -62,11 +62,38 @@ class Pipeline(MovieManager, ViewParsingManager):
         self.fileLogger.logevent(f"There are {total_count} outstanding job(s) to process.".ljust(20))
         
         self.process_img_recordings(metadata_status)
-
-        self.process_top_view_videos(metadata_status)
+        
+        if self.perspective == 'top':
+            self.process_top_view_videos(metadata_status)
+        elif self.perspective == 'side':
+            self.process_side_view_videos(metadata_status)
+        else:
+            print(f'Invalid perspective: {self.perspective}')
 
         #CLEAN UP staging_output
         # if SCRATCH.exists():
         #     print(f'Removing {SCRATCH}')
         #     delete_in_background(SCRATCH)
 
+
+    def movie_creation(self):
+        if self.debug:
+            print(f'DEBUG: Start movie_creation')
+        if self.base_input_location.is_dir():
+            self.fileLogger.logevent(f"INPUT FOLDER: {self.base_input_location}".ljust(20))
+        else:
+            self.fileLogger.logevent(f"INPUT FOLDER DOES NOT EXIST; EXITING: {self.base_input_location}".ljust(20))
+            exit()
+            
+        self.base_output_location.mkdir(parents=True, exist_ok=True)
+        self.fileLogger.logevent(f"FINAL OUTPUT FOLDER: {self.base_output_location}".ljust(20))
+                                 
+        #CHECK COUNT OF OUTSTANDING JOBS IN base_input_location
+        metadata_status = self.fileLogger.read_metadata_status_files(self.base_input_location, self.debug)
+        total_count = sum(len(subfolder_dict) for subfolder_dict in metadata_status.values())
+        self.fileLogger.logevent(f"There are {total_count} outstanding job(s) to process.".ljust(20))
+        
+        self.process_img_recordings(metadata_status)
+
+        if self.debug:
+            print(f'DEBUG: End movie_creation')
