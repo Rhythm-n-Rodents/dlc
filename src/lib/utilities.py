@@ -2,7 +2,6 @@ import os
 import shutil
 from pathlib import Path
 from datetime import datetime
-import json
 import concurrent
 from concurrent.futures.process import ProcessPoolExecutor
 from concurrent.futures import Future, ThreadPoolExecutor
@@ -68,7 +67,7 @@ def delete_in_background(path: str) -> Future:
 
 def move_files_in_background(glob_mask: str, src_path: Path, dest_path: Path, mode : str = 'move', debug : bool = False) -> None:
     '''
-    Moves all files [matching glob_mask] from src_path to dest_path in the background
+    Moves or copies (depending on mode) all files [matching glob_mask] from src_path to dest_path in the background
     '''
     
     # Find all files matching the glob mask in the source path
