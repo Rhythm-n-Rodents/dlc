@@ -46,6 +46,7 @@ base_output_location='/net/dk-server/'
 #GENERAL CONFIG
 use_absolute_locations=False #sys will autopopulate based on user & src_host
 contrastfactor=1.05 #used in splitting left and right from top view
+move_or_copy_to_final_output = 'copy'
 #################################################################
 
 import argparse
@@ -69,7 +70,7 @@ def capture_args():
         "--task",
         type=str,
         help="Enter the task you want to perform: \
-                        all|NA",
+                        all | movie_creation | NA",
         required=False,
         default="all",
     )
@@ -131,6 +132,7 @@ def main():
         str(input_location),
         str(output_location),
         str(perspective),
+        str(move_or_copy_to_final_output),
         src_host=src_host,
         compute_host=compute_host,
         task=task,
@@ -142,7 +144,8 @@ def main():
 
     #FOR MANUAL PROCESSING OF SPECIFIC FUNCTIONALITY
     function_mapping = {
-        "all": pipeline.all
+        "all": pipeline.all,
+        "movie_creation": pipeline.movie_creation
     }
 
     start_time = timer()
