@@ -250,8 +250,8 @@ class ViewParsingManager:
         text = os.path.basename(movie_name)
         base_name = os.path.join(os.path.dirname(movie_name), text.split('DLC')[0])
         video_name = f"{base_name}.avi"
-        video_nameR = f"{base_name}MirrorR.avi"
-        video_nameL = f"{base_name}MaskL.avi"
+        video_nameR = f"Mirror{base_name}R.avi"
+        video_nameL = f"Mask{base_name}L.avi"
         self.process_and_split_video(video_name, video_nameR, good_frames, head_angle, df, factor, 315, 630, faceshift=60, flip=True)
         self.process_and_split_video(video_name, video_nameL, good_frames, head_angle, df, factor, 0, 315, faceshift=80)
 
