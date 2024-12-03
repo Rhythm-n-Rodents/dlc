@@ -13,12 +13,13 @@ class Pipeline(MovieManager, ViewParsingManager):
     """
 
 
-    def __init__(self, base_input_location, base_output_location, perspective, src_host, compute_host, task, log_file, user_name, contrastfactor, debug=False):
+    def __init__(self, base_input_location, base_output_location, perspective, move_or_copy_to_final_output, src_host, compute_host, task, log_file, user_name, contrastfactor, debug=False):
         '''Setting up the pipeline and the processing configurations'''
         super().__init__()
         self.base_input_location=Path(base_input_location)
         self.base_output_location=Path(base_output_location)
         self.perspective=str(perspective)
+        self.move_or_copy_to_final_output=str(move_or_copy_to_final_output)
         self.src_host=src_host
         self.compute_host=compute_host
         self.task=task
