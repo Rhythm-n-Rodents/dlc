@@ -30,7 +30,7 @@ class MovieManager:
                 final_output = input
                 SCRATCH = Path(scratch_tmp, 'pipeline_behavior', folder, session, 'img_recordings')
 
-                if last_task == 'create_json_manifest':
+                if last_task == 'create_json_manifest' or self.task == 'movie_creation':
                 
                     SCRATCH.mkdir(parents=True, exist_ok=True)
                     debug = self.debug
@@ -41,14 +41,13 @@ class MovieManager:
 
                     meta_data_filename = Path(final_output, "meta-data.json")
                     self.fileLogger.update_individual_json_manifest(meta_data_filename, 'movie_creation')
-
                 else:
                     print(f'SKIPPING {folder}; MOVIES ALREADY CREATED')
                     
                 if self.task == 'movie_creation':
                     print(f'MOVING PREVIOUSLY-CREATED MOVIES FROM {SCRATCH} TO FINAL OUTPUT FOLDER: {final_output}')
-                    move_files_in_background('.avi', SCRATCH, final_output, self.debug)
-                    move_files_in_background('.mp4', SCRATCH, final_output, self.debug)
+                    move_files_in_background('.avi', SCRATCH, final_output, self.move_or_copy_to_final_output, self.debug)
+                    move_files_in_background('.mp4', SCRATCH, final_output, self.move_or_copy_to_final_output, self.debug)
 
 
     def make_movie_for_all_trials(self, input: Path, SCRATCH: Path, files_cnt: int, debug: bool):
