@@ -31,6 +31,10 @@ class FileLogger:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
 
+        if not os.path.exists(LOGFILE):
+            with open(LOGFILE, 'w') as file:
+                pass  # Create an empty file
+
         # Create a file handler
         file_handler = logging.FileHandler(LOGFILE)
         file_handler.setLevel(logging.DEBUG)

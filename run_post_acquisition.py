@@ -51,12 +51,32 @@ move_or_copy_to_final_output = 'copy'
 
 import argparse
 import os
-import sys, socket
+import socket
 from timeit import default_timer as timer
 from pathlib import Path
 
-PIPELINE_ROOT = Path("./src").absolute()
-sys.path.append(PIPELINE_ROOT.as_posix())
+
+BASE_DIR = Path.cwd()
+SRC_PATH = Path(BASE_DIR).resolve().parent / "src"
+LIB_PATH = SRC_PATH / "lib"
+SETTINGS_PATH = Path(BASE_DIR).resolve().parent / "settings"
+os.environ["PYTHONPATH"] = f"{str(SRC_PATH)}:{str(LIB_PATH)}:{str(SETTINGS_PATH)}"
+
+# Ensure all required subfolders are treated as packages
+for subfolder in SRC_PATH.glob('**/'):
+    init_file = subfolder / '__init__.py'
+    if not init_file.exists():
+        init_file.touch()
+
+for subfolder in LIB_PATH.glob('**/'):
+    init_file = subfolder / '__init__.py'
+    if not init_file.exists():
+        init_file.touch()
+
+for subfolder in SETTINGS_PATH.glob('**/'):
+    init_file = subfolder / '__init__.py'
+    if not init_file.exists():
+        init_file.touch()
 
 from src.behavior_pipeline import Pipeline
 
@@ -147,7 +167,7 @@ def main():
         "all": pipeline.all,
         "movie_creation": pipeline.movie_creation
     }
-
+    exit()
     start_time = timer()
     if task in function_mapping:
         print()

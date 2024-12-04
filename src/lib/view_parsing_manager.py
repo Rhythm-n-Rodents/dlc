@@ -8,15 +8,14 @@ import numpy as np
 import math
 import cv2 
 from PIL import Image, ImageEnhance
-import lib.image_util as image_util
-from lib.utilities import get_scratch_dir, move_files_in_background
-import settings.dlc_setting as dlc_config
-
 from openpyxl import Workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
 
 
-from settings.settings import this_computer
+from src.lib import image_util
+from src.lib.utilities import get_scratch_dir, move_files_in_background
+from settings import dlc_setting as dlc_config
+#import settings.dlc_setting as dlc_config
 
 
 class ViewParsingManager:

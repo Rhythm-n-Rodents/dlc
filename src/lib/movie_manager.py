@@ -1,9 +1,7 @@
 import cv2 
 from pathlib import Path
 import re
-from lib.utilities import get_scratch_dir, move_files_in_background, get_nworkers, run_commands_concurrently
-import numpy as np
-from tqdm import tqdm
+from src.lib.utilities import get_scratch_dir, move_files_in_background, get_nworkers, run_commands_concurrently
 from moviepy import ImageSequenceClip
 from concurrent.futures.process import ProcessPoolExecutor
 

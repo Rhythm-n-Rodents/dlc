@@ -1,10 +1,8 @@
 import getpass
-import subprocess
 from pathlib import Path
-from lib.movie_manager import MovieManager
-from lib.view_parsing_manager import ViewParsingManager
-from lib.utilities import get_scratch_dir, delete_in_background
-from lib.file_logger import FileLogger
+from src.lib.movie_manager import MovieManager
+from src.lib.view_parsing_manager import ViewParsingManager
+from src.lib.file_logger import FileLogger
 
 
 class Pipeline(MovieManager, ViewParsingManager):
